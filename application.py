@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import pickle
 from model_files.ml_model import predict_model
-app = Flask('pymes')
+application = app = Flask(__name__)
 
 
 @app.route('/api/predict', methods=['POST'])
