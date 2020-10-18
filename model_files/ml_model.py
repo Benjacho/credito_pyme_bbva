@@ -49,11 +49,13 @@ def predict_model(config, model):
         df = config
 
     print(f'df: {df}')
-    prepared_df, scaler = preprocess_transformers(df, 'minmax')
+    # prepared_df, scaler = preprocess_transformers(df, 'minmax')
+
+    prepared_df = df
     y_pred = model.predict(prepared_df)
 
     print(f'y_pred {y_pred}')
-    print(f'scaler {scaler}')
+    # print(f'scaler {scaler}')
 
     return y_pred
     # return 1
