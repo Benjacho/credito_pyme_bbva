@@ -27,10 +27,9 @@ def preprocess_transformers(y_train, transf):
     else:
         # y_train = y_train.values
         y_train = np.log(y_train).values
-        mm_scaler = ''
         mm_scaler2 = ''
 
-    return y_train, mm_scaler, mm_scaler2
+    return y_train, mm_scaler2
 
 
 def transformacion_inversa(y_predict, mm_scaler2):
@@ -45,12 +44,16 @@ def transformacion_inversa(y_predict, mm_scaler2):
 
 def predict_model(config, model):
     if type(config) == dict:
-        df = pd.DataFrame(config)
+        df = pd.DataFrame(config, index=[0])
     else:
         df = config
 
+    print(f'df: {df}')
     prepared_df, scaler = preprocess_transformers(df, 'minmax')
     y_pred = model.predict(prepared_df)
 
-    transformacion_inversa(y_pred, scaler)
+    print(f'y_pred {y_pred}')
+    print(f'scaler {scaler}')
+
     return y_pred
+    # return 1
