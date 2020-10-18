@@ -9,7 +9,7 @@ def predict():
     credit = request.get_json()
     print(credit)
 
-    with open('./model_files/model.sav', 'rbb' as f_in):
+    with open('./model_files/model.sav', 'rbb') as f_in:
         model = pickle.load(f_in)
         f_in.close()
 
@@ -19,8 +19,19 @@ def predict():
         'predictions': list(predictions)
     }
 
-    return result
+    return jsonify(result)
+
+
+@app.route('/', methods=['GET'])
+def welcome():
+    result = {
+        'team': 'inspirational',
+        'members': ['Yennifer', 'Mary', 'Isidro', 'Edgar', 'Benjamin', 'Ernesto'],
+        'solution': 'ML platform'
+    }
+
+    return jsonify(result)
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=9696)
+    app.run(debug=True, host='127.0.0.1', port=5000)
